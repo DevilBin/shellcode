@@ -22,7 +22,6 @@ int main() {
 ##0x01 main反汇编
 ***main***
 >![image](./screenshots/main.png)
-
 第3行 16位对齐
 第4行 栈顶指针下移32字节，为变量留出位置
 第5行 "/usr/bin/python"字符串地址压入esp + 0x18（24）位置
@@ -37,7 +36,6 @@ int main() {
 
 ***execve***
 >![image](./screenshots/execve.png)
-
 第1行 设置函数，同时栈顶由于ret入栈，ebx入栈：esp = esp - 0x8
 第2行 NULL mov到edx（第三个参数，因为栈顶移动了8字节，所以地址由esp + 0x8（8）变成esp + 0x10（16））
 第3行 将name的值mov到ecx（第二个参数，地址由esp + 0x04（4）变成esp + 0xc（12））
@@ -55,7 +53,6 @@ int main() {
 ##0x02 exitfunc反汇编
 ***exit（0）***
 >![image](./screenshots/exitfunc.png)
-
 退出函数会返回一个参数，并且最终储存在ebx中，如果返回0则预示着函数没有出错，系统0x1调用参数储存在eax，然后调用int 0x80中断
 
 ##0x03 构造shellcode
