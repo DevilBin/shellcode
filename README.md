@@ -23,14 +23,14 @@ int main() {
 ***main***
 >![image](./screenshots/main.png)
 
-第3行 16位对齐  
-第4行 栈顶指针下移32字节，为变量留出位置  
-第5行 "/usr/bin/python"字符串地址压入esp + 0x18（24）位置  
-第6行 0x0压入esp + 0x1c（28）位置  
+第3行 16 位对齐  
+第4行 栈顶指针下移 32 字节，为变量留出位置  
+第5行 "/usr/bin/python"字符串地址压入 esp + 0x18（24）位置  
+第6行 0x0 压入 esp + 0x1c（28）位置  
 第7行 将"/usr/bin/python"的字符串地址 mov 到 eax 寄存器  
-第8行 将 NULL mov 到esp + 0x8（8）位置（第一个参数入栈，从左到右依次为name[0], name, NULL）  
-第9行 将 name 地址传到edx  
-第10行 将 edx 的内容，也就是 name 的地址 mov 到esp + 0x04（4）(第二个参数入栈)  
+第8行 将 NULL mov 到 esp + 0x8（8）位置（第一个参数入栈，从左到右依次为 name[0], name, NULL）  
+第9行 将 name 地址传到 edx  
+第10行 将 edx 的内容，也就是 name 的地址 mov 到 esp + 0x04（4）(第二个参数入栈)  
 第11行 将 eax 的内容，也就是"/usr/bin/python"的字符串地址 mov 到 esp（0）（第一个参数入栈）  
 第12行 call execve  
 第13~行 返回，退出
@@ -39,8 +39,8 @@ int main() {
 >![image](./screenshots/execve.png)
 
 第1行 设置函数，同时栈顶由于 ret 入栈，ebx 入栈：esp = esp - 0x8  
-第2行 NULL mov 到 edx（第三个参数，因为栈顶移动了8字节，所以地址由esp + 0x8（8）变成 esp + 0x10（16））  
-第3行 将 name 的值 mov 到 ecx（第二个参数，地址由esp + 0x04（4）变成 esp + 0xc（12））  
+第2行 NULL mov 到 edx（第三个参数，因为栈顶移动了 8 字节，所以地址由 esp + 0x8（8）变成 esp + 0x10（16））  
+第3行 将 name 的值 mov 到 ecx（第二个参数，地址由 esp + 0x04（4）变成 esp + 0xc（12））  
 第4行 将 &name[0]，也就是"/usr/bin/python"字符串的地址 mov 到 ebx（第一个参数，地址由 esp 变成 esp + 0x8（8））  
 第5行 将 0xb mov 到 eax，调用 int 0x80 中断。  
 第6~17行 执行并返回到 main 函数。
